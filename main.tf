@@ -7,3 +7,9 @@ data "archive_file" "empty_lambda_initialiser" {
     filename = "README.txt"
   }
 }
+
+resource "null_resource" "test" {
+  triggers = {
+    zipfile = "${data.archive_file.empty_lambda_initialiser.output_base64sha256}"
+  }
+}
